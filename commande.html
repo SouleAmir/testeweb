@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Commande Girly Boutique</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#fff6f9;
+padding:20px;
+}
+
+.container{
+max-width:800px;
+margin:auto;
+}
+
+.logo{
+text-align:center;
+margin-bottom:20px;
+}
+
+.logo img{
+height:150px;
+}
+
+.formulaire{
+background:white;
+padding:25px;
+border-radius:15px;
+box-shadow:0 4px 15px rgba(0,0,0,.1);
+}
+
+h2{
+text-align:center;
+color:#e6407a;
+margin-bottom:20px;
+}
+
+#resume{
+background:#fff0f6;
+padding:15px;
+border-radius:10px;
+margin-bottom:20px;
+}
+
+.produit{
+padding:10px 0;
+border-bottom:1px solid #ddd;
+}
+
+.total{
+margin-top:15px;
+font-size:22px;
+font-weight:bold;
+color:#e6407a;
+}
+
+input,
+select,
+textarea{
+width:100%;
+padding:12px;
+margin-top:10px;
+margin-bottom:15px;
+border:1px solid #ddd;
+border-radius:8px;
+}
+
+button{
+width:100%;
+padding:15px;
+border:none;
+background:#25D366;
+color:white;
+font-size:18px;
+border-radius:8px;
+cursor:pointer;
+}
+
+button:hover{
+opacity:.9;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="logo">
+<img src="girly.png" alt="Girly Boutique">
+</div>
+
+<div class="formulaire">
+
+<h2>Finaliser ma commande</h2>
+
+<div id="resume"></div>
+
+<input
+type="text"
+id="nom"
+placeholder="Nom">
+
+<input
+type="text"
+id="prenom"
+placeholder="Prénom">
+
+<input
+type="tel"
+id="telephone"
+placeholder="Téléphone">
+
+<select id="ville" onchange="calculerTotal()">
+
+<option value="">
+Choisir votre ville
+</option>
+
+<option value="Moroni">
+Moroni
+</option>
+
+<option value="Autre">
+Autre ville
+</option>
+
+</select>
+
+<textarea
+id="adresse"
+placeholder="Adresse complète">
+</textarea>
+
+<p id="livraison">
+Livraison : À discuter
+</p>
+
+<p id="totalFinal" class="total">
+Total : 0 KMF
+</p>
+
+<button onclick="envoyerCommande()">
+Envoyer sur WhatsApp
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+let panier =
+JSON.parse(
+localStorage.getItem("panierGirly")
+) || [];
+
+let totalArticles = 0;
+
+function afficherResume(){
+
+let html="";
+
+totalArticles = 0;
+
+panier.forEach(article=>{
+
+let sousTotal =
+article.prix *
+article.qte;
+
+totalArticles += sousTotal;
+
+html += `
+<div class="produit">
+${article.nom}
+ x ${article.qte}
+ =
+ ${sousTotal} KMF
+</div>
+`;
+
+});
+
+document.getElementById(
+"resume"
+).innerHTML = html;
+
+calculerTotal();
+
+}
+
+function calculerTotal(){
+
+let ville =
+document.getElementById("ville").value;
+
+let total = totalArticles;
+
+if(ville==="Moroni"){
+
+total += 500;
+
+document.getElementById(
+"livraison"
+).innerHTML =
+"Livraison : 500 KMF";
+
+}else{
+
+document.getElementById(
+"livraison"
+).innerHTML =
+"Livraison : À discuter lors de la commande";
+
+}
+
+document.getElementById(
+"totalFinal"
+).innerHTML =
+"Total : "+
+total+
+" KMF";
+
+}
+
+function envoyerCommande(){
+
+let nom =
+document.getElementById("nom").value;
+
+let prenom =
+document.getElementById("prenom").value;
+
+let telephone =
+document.getElementById("telephone").value;
+
+let ville =
+document.getElementById("ville").value;
+
+let adresse =
+document.getElementById("adresse").value;
+
+if(
+!nom ||
+!prenom ||
+!telephone ||
+!ville ||
+!adresse
+){
+
+alert(
+"Veuillez remplir tous les champs."
+);
+
+return;
+
+}
+
+let total = totalArticles;
+
+let livraison =
+"À discuter";
+
+if(ville==="Moroni"){
+
+livraison = "500 KMF";
+
+total += 500;
+
+}
+
+let details="";
+
+panier.forEach(article=>{
+
+details +=
+"• "+
+article.nom+
+" x "+
+article.qte+
+" = "+
+(article.prix*article.qte)+
+" KMF\n";
+
+});
+
+let message =
+"🌸 GIRLY BOUTIQUE 🌸\n\n"+
+"Nom : "+nom+" "+prenom+"\n"+
+"Téléphone : "+telephone+"\n"+
+"Ville : "+ville+"\n"+
+"Adresse : "+adresse+"\n\n"+
+"Produits :\n"+
+details+
+"\nLivraison : "+livraison+
+"\nTotal : "+total+" KMF";
+
+window.open(
+"https://wa.me/2694447071?text="+
+encodeURIComponent(message),
+"_blank"
+);
+
+}
+
+afficherResume();
+
+</script>
+
+</body>
+</html>

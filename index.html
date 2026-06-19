@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Girly Boutique</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#fff6f9;
+overflow-x:hidden;
+}
+
+.grid::after{
+content:"";
+width:320px;
+}
+
+header{
+background:rgba(255,255,255,.95);
+backdrop-filter:blur(15px);
+padding:15px 30px;
+box-shadow:0 5px 25px rgba(230,64,122,.15);
+position:sticky;
+top:0;
+z-index:999;
+}
+
+.logo img{
+height:120px;
+filter:drop-shadow(0 10px 20px rgba(230,64,122,.25));
+}
+
+.logo h2{
+font-size:38px;
+font-weight:700;
+background:linear-gradient(45deg,#e6407a,#ff6fa5);
+-webkit-text-fill-color:transparent;
+}
+
+nav{
+display:flex;
+gap:15px;
+}
+
+nav a{
+text-decoration:none;
+padding:10px 18px;
+border-radius:30px;
+background:#fff;
+color:#e6407a;
+font-weight:600;
+transition:.3s;
+}
+
+nav a:hover{
+background:#e6407a;
+color:white;
+}
+
+.hero{
+position:relative;
+height:550px;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+overflow:hidden;
+
+background:
+linear-gradient(rgba(0,0,0,.35),rgba(0,0,0,.35)),
+url("fond-luxe-beaute.jpg");
+
+background-size:cover;
+background-position:center;
+background-attachment:fixed;
+}
+.luxury-icons{
+position:absolute;
+bottom:40px;
+left:50%;
+transform:translateX(-50%);
+font-size:35px;
+letter-spacing:15px;
+z-index:2;
+animation:pulse 3s infinite;
+}
+
+@keyframes pulse{
+50%{transform:translateX(-50%) scale(1.1);}
+}
+
+.hero::before{
+content:"";
+position:absolute;
+width:100%;
+height:100%;
+background:url("motifs-fleurs.png");
+opacity:.12;
+animation:float 15s linear infinite;
+}
+
+.hero::after{
+content:"";
+position:absolute;
+inset:0;
+background:
+radial-gradient(circle at top right,
+rgba(255,255,255,.35),
+transparent 40%),
+radial-gradient(circle at bottom left,
+rgba(255,192,203,.25),
+transparent 40%);
+}
+
+.hero h2{
+position:relative;
+z-index:2;
+font-size:60px;
+font-weight:700;
+color:white;
+text-shadow:0 5px 25px rgba(0,0,0,.4);
+letter-spacing:2px;
+max-width:900px;
+line-height:1.3;
+}
+
+.hero p{
+position:relative;
+z-index:2;
+font-size:22px;
+color:white;
+margin-top:15px;
+}
+
+@keyframes float{
+0%{transform:translateY(0);}
+50%{transform:translateY(-20px);}
+100%{transform:translateY(0);}
+}
+
+.hero h2{
+font-size:42px;
+font-weight:700;
+color:#d63384;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,320px));
+justify-content:center;
+gap:35px;
+padding:40px;
+max-width:1600px;
+margin:auto;
+}
+
+.card{
+width:100%;
+max-width:320px;
+margin:auto;
+background:white;
+border-radius:25px;
+overflow:hidden;
+box-shadow:0 15px 35px rgba(0,0,0,.08);
+transition:.4s;
+
+}
+.cart,
+.formulaire{
+max-width:900px;
+margin:40px auto;
+padding:30px;
+}
+@media(max-width:768px){
+
+.grid{
+grid-template-columns:1fr;
+padding:15px;
+gap:20px;
+}
+
+.card{
+max-width:100%;
+}
+
+}
+.card:hover{
+transform:translateY(-10px);
+box-shadow:0 25px 45px rgba(230,64,122,.20);
+}
+
+.card img{
+width:100%;
+height:260px;
+object-fit:cover;
+transition:.5s;
+}
+
+.card:hover img{
+transform:scale(1.08);
+}
+
+.card-body{
+padding:20px;
+}
+
+.card-body h3{
+color:#d63384;
+margin-bottom:10px;
+font-size:22px;
+}
+
+.price{
+font-size:24px;
+font-weight:700;
+color:#ff4f8b;
+margin-bottom:10px;
+}
+
+.stock-ok{
+display:inline-block;
+background:#e8fff0;
+color:#00a651;
+padding:5px 10px;
+border-radius:20px;
+font-size:13px;
+margin-bottom:10px;
+}
+
+.stock-ko{
+display:inline-block;
+background:#ffe7e7;
+color:#ff0000;
+padding:5px 10px;
+border-radius:20px;
+font-size:13px;
+}
+
+input,
+select,
+textarea{
+width:100%;
+padding:12px;
+border:2px solid #f3d1dd;
+border-radius:12px;
+margin-top:10px;
+outline:none;
+transition:.3s;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+border-color:#e6407a;
+box-shadow:0 0 10px rgba(230,64,122,.2);
+}
+
+.btn{
+width:100%;
+padding:14px;
+margin-top:12px;
+border:none;
+border-radius:15px;
+font-weight:600;
+font-size:15px;
+cursor:pointer;
+background:linear-gradient(45deg,#e6407a,#ff6fa5);
+color:white;
+transition:.3s;
+position:relative;
+overflow:hidden;
+}
+
+.btn:hover{
+transform:translateY(-3px);
+box-shadow:0 10px 20px rgba(230,64,122,.30);
+}
+
+.cart{
+background:white;
+max-width:900px;
+margin:40px auto;
+padding:30px;
+border-radius:25px;
+box-shadow:0 15px 35px rgba(0,0,0,.08);
+}
+
+.cart h2{
+color:#d63384;
+margin-bottom:20px;
+}
+
+#cartItems p{
+padding:12px;
+background:#fff5f8;
+margin-bottom:10px;
+border-radius:12px;
+}
+
+#total{
+margin-top:15px;
+font-size:28px;
+color:#ff4f8b;
+}
+
+.checkout{
+width:100%;
+padding:16px;
+border:none;
+border-radius:15px;
+font-size:18px;
+font-weight:700;
+background:linear-gradient(45deg,#25D366,#34e87a);
+color:white;
+cursor:pointer;
+transition:.3s;
+}
+
+.checkout:hover{
+transform:translateY(-3px);
+box-shadow:0 10px 20px rgba(37,211,102,.30);
+}
+
+.formulaire{
+background:white;
+max-width:900px;
+margin:30px auto;
+padding:30px;
+border-radius:25px;
+box-shadow:0 15px 35px rgba(0,0,0,.08);
+}
+
+.formulaire h2{
+color:#d63384;
+margin-bottom:15px;
+}
+
+@media(max-width:768px){
+
+header{
+flex-direction:column;
+gap:20px;
+}
+
+.logo{
+flex-direction:column;
+text-align:center;
+}
+
+.hero h2{
+font-size:30px;
+}
+
+.grid{
+padding:15px;
+}
+
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{background:#fff6f9}
+header{background:#fff;padding:15px;text-align:center;box-shadow:0 2px 10px rgba(0,0,0,.1)}
+header img{height:80px}
+.hero{text-align:center;padding:30px;color:#e6407a}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;padding:20px}
+.card{background:#fff;border-radius:15px;overflow:hidden;box-shadow:0 4px 15px rgba(0,0,0,.1);transition:.3s}
+.card:hover{transform:translateY(-5px)}
+.card img{width:100%;height:220px;object-fit:cover;transition:.4s}
+.card:hover img{transform:scale(1.08)}
+.card-body{padding:15px}
+.price{color:#e6407a;font-weight:bold}
+.qte{width:100%;padding:8px;margin:8px 0}
+.btn{width:100%;padding:10px;border:none;background:#e6407a;color:#fff;border-radius:8px;cursor:pointer}
+.cart,.formulaire{background:#fff;margin:20px;padding:20px;border-radius:15px;box-shadow:0 4px 15px rgba(0,0,0,.1)}
+.stock-ok{color:green;font-weight:bold}
+.stock-ko{color:red;font-weight:bold}
+input,select,textarea{width:100%;padding:10px;margin:8px 0}
+.checkout{background:#25D366;color:#fff;border:none;padding:12px;width:100%;border-radius:8px}
+</style>
+</head>
+<body>
+
+<header>
+
+<div class="logo">
+
+<img src="girly.png" alt="Girly Beauté & Soins">
+
+<div>
+<h2>Girly Boutique</h2>
+<p style="color:#777;font-size:14px;">
+Beauté • Soins • Cosmétique • Accessoires
+</p>
+</div>
+
+</div>
+
+<nav>
+<a href="#produits">Produits</a>
+<a href="#panier">Panier</a>
+</nav>
+
+</header>
+
+<div class="hero">
+
+<div>
+
+<h2>
+✨ Révélez votre beauté naturelle ✨
+</h2>
+
+<p>
+Cosmétiques • Soins • Parfums • Élégance
+</p>
+
+</div>
+</div>
+
+<div class="grid">
+
+<div class="card">
+<img src="mask visages.jpg">
+<div class="card-body">
+<h3>Mask visage</h3>
+<p class="price">800 KMF</p>
+<p>Stock : <span id="stock0">50</span></p>
+<select id="variante0">
+<option value="Miel">Miel</option>
+<option value="Lemon">Lemon</option>
+<option value="Orange Fresh">Orange Fresh</option>
+<option value="Collagen">Collagen</option>
+</select>
+<p id="etat0" class="stock-ok">Disponible</p>
+<input type="number" id="qte0" value="1" min="1" max="10" class="qte">
+<button class="btn" onclick="addToCart(0,'Mask visage - '+document.getElementById('variante0').value,800)">Ajouter</button>
+</div></div>
+
+<div class="card">
+<img src="musc.jpg">
+<div class="card-body">
+<h3>Musk tahara</h3>
+<p class="price">2000 KMF</p>
+<p>Stock : <span id="stock1">40</span></p>
+<select id="variante1">
+<option value="Blanc">Blanc</option>
+<option value="Rouge">Rouge</option>
+<option value="Jaune">Jaune</option>
+<option value="Rose">Rose</option>
+<option value="Rose foncé">Rose foncé</option>
+<option value="Bleu foncé">Bleu foncé</option>
+<option value="Jaune Mauve">Jaune Mauve</option>
+</select>
+<p id="etat1" class="stock-ok">Disponible</p>
+<input type="number" id="qte1" value="1" min="1" max="5" class="qte">
+<button class="btn" onclick="addToCart(1,'Musk Tahara - '+document.getElementById('variante1').value,2000)">Ajouter</button>
+</div></div>
+
+<div class="card">
+<img src="anti-cerne.jpg">
+<div class="card-body">
+<h3>ANTICERNE</h3>
+<p class="price">1000 KMF</p>
+<p>Stock : <span id="stock2">12</span></p>
+<select id="variante2">
+<option value="Golden">Golden</option>
+<option value="Hyaluric (Bleu)">Hyaluric (Bleu)</option>
+<option value="Sea Fannel">Sea Fannel</option>
+</select>
+<p id="etat1" class="stock-ok">Disponible</p>
+<input type="number" id="qte2" value="1" min="1" max="0" class="qte">
+<button class="btn" onclick="addToCart(2,'Anticerne - '+document.getElementById('variante2').value,1000)">Ajouter</button>
+</div></div>
+
+<div class="card">
+<img src="brosse bandeaux.jpg">
+<div class="card-body">
+<h3>Brosse Bandeaux</h3>
+<p class="price">2500 KMF</p>
+<p>Stock : <span id="stock3">12</span></p>
+<p id="etat3" class="stock-ok">Disponible</p>
+<input type="number" id="qte3" value="1" min="1" class="qte">
+<button class="btn" onclick="addToCart(3,'Brosse Bandeaux',2500)">Ajouter</button>
+</div></div>
+
+<div class="card">
+<img src="brosse_unique1.jpg">
+<div class="card-body">
+<h3>Brosse Unique</h3>
+<p class="price">1500 KMF</p>
+<p>Stock : <span id="stock4">48</span></p>
+<p id="etat4" class="stock-ok">Disponible</p>
+<input type="number" id="qte4" value="1" min="1" class="qte">
+<button class="btn" onclick="addToCart(4,'Brosse Unique',1500)">Ajouter</button>
+</div></div>
+
+<div class="card">
+<img src="crayon a levre.jpg">
+<div class="card-body">
+<h3>Crayon à Lèvres</h3>
+<p class="price">800 KMF</p>
+<p>Stock : <span id="stock5">24</span></p>
+<select id="couleurCrayon">
+<option value="Rose framboise">🌺 Rose framboise</option>
+<option value="Prune foncé">🍇 Prune foncé</option>
+<option value="Mauve rosé">💜 Mauve rosé</option>
+<option value="Pêche nude">🍑 Pêche nude</option>
+<option value="Rose poudré">🌸 Rose poudré</option>
+<option value="Terracotta rosé">🤎 Terracotta rosé</option>
+<option value="Violet mauve">🪻 Violet mauve</option>
+<option value="Rouge rosé">❤️ Rouge rosé</option>
+<option value="Rouge cerise">🍒 Rouge cerise</option>
+<option value="Nude rosé">🌷 Nude rosé</option>
+<option value="Fuchsia">💖 Fuchsia</option>
+</select>
+<p id="etat5" class="stock-ok">Disponible</p>
+<input type="number" id="qte5" value="1" min="1" class="qte">
+<button class="btn" onclick="addToCart(5,'Crayon à Lèvres - '+document.getElementById('couleurCrayon').value,800)">Ajouter</button>
+</div></div>
+
+<div class="card">
+<img src="nova.jpg">
+<div class="card-body">
+<h3>Canes Nova</h3>
+<p class="price">6000 KMF</p>
+<p>Stock : <span id="stock6">14</span></p>
+<select id="numeroNova">
+<option value="250">Nova N°250</option>
+<option value="06">Nova N°06</option>
+<option value="623">Nova N°623</option>
+<option value="136">Nova N°136</option>
+</select>
+<p id="etat6" class="stock-ok">Disponible</p>
+<input type="number" id="qte6" value="1" min="1" class="qte">
+<button class="btn" onclick="addToCart(6,'Canes Nova N°'+document.getElementById('numeroNova').value,6000)">Ajouter</button>
+</div></div>
+
+<div class="card">
+<img src="gloss.jpg">
+<div class="card-body">
+<h3>Gloss</h3>
+<p class="price">1500 KMF</p>
+<p>Stock : <span id="stock7">24</span></p>
+<select id="teinteGloss">
+<option value="Rouge">Rouge</option>
+<option value="Rose">Rose</option>
+<option value="Rose foncée">Rose foncée</option>
+<option value="Beige">Beige</option>
+<option value="Beige foncé">Beige foncé</option>
+</select>
+<p id="etat7" class="stock-ok">Disponible</p>
+<input type="number" id="qte7" value="1" min="1" class="qte">
+<button class="btn" onclick="addToCart(7,'Gloss - '+document.getElementById('teinteGloss').value,1500)">Ajouter</button>
+</div></div>
+
+<div class="card">
+<img src="gommage et brosse a levre.png">
+<div class="card-body">
+<h3>Gommage + Brosse à Lèvres</h3>
+<p class="price">2000 KMF</p>
+<p>Stock : <span id="stock8">24</span></p>
+<p id="etat8" class="stock-ok">Disponible</p>
+<input type="number" id="qte8" value="1" min="1" class="qte">
+<button class="btn" onclick="addToCart(8,'Gommage + Brosse à Lèvres',2000)">Ajouter</button>
+</div></div>
+
+<div class="card">
+<img src="pire-de-gants-exfoliants.jpg">
+<div class="card-body">
+<h3>Gant Exfoliant</h3>
+<p class="price">1000 KMF</p>
+<p>Stock : <span id="stock9">36</span></p>
+<p id="etat9" class="stock-ok">Disponible</p>
+<input type="number" id="qte9" value="1" min="1" class="qte">
+<button class="btn" onclick="addToCart(9,'Gant Exfoliant',1000)">Ajouter</button>
+</div></div>
+
+<div class="card">
+<img src="serum vitamine c.jpg">
+<div class="card-body">
+<h3>Sérum à la Vitamine C</h3>
+<p class="price">3500 KMF</p>
+<p>Stock : <span id="stock10">12</span></p>
+<p id="etat10" class="stock-ok">Disponible</p>
+<input type="number" id="qte10" value="1" min="1" class="qte">
+<button class="btn" onclick="addToCart(10,'Sérum à la Vitamine C',3500)">Ajouter</button>
+</div></div>
+
+
+</div>
+
+<div class="cart">
+<h2>Panier</h2>
+<div id="cartItems"></div>
+<p id="livraison">Livraison : 0 KMF</p>
+<h3 id="total">Total : 0 KMF</h3>
+<button class="checkout" onclick="ouvrirFormulaire()">Valider mon panier</button>
+</div>
+
+<div class="formulaire" id="formulaire" style="display:none">
+<h2>Informations client</h2>
+<input id="nom" placeholder="Nom">
+<input id="prenom" placeholder="Prénom">
+<input id="telephone" placeholder="Téléphone">
+<select id="ville" onchange="afficherPanier()">
+<option value="">Choisir la ville</option>
+<option value="Moroni">Moroni</option>
+<option value="Autre">Autre ville</option>
+</select>
+<textarea id="adresse" placeholder="Adresse"></textarea>
+<button class="btn" onclick="envoyerCommande()">Commander via WhatsApp</button>
+</div>
+
+<script>
+let panier=[];
+let stocks=[50,40,12,12,48,24,14,24,24,36,24];
+
+
+
+function addToCart(id,nom,prix){
+let qte=parseInt(document.getElementById("qte"+id).value);
+if(stocks[id]<=0){alert("Rupture de stock");return;}
+if(qte>stocks[id]){alert("Stock disponible : "+stocks[id]);return;}
+
+panier.push({nom,prix,qte});
+stocks[id]-=qte;
+document.getElementById("stock"+id).innerText=stocks[id];
+
+if(stocks[id]<=0){
+document.getElementById("etat"+id).innerText="❌ Rupture de stock";
+document.getElementById("etat"+id).className="stock-ko";
+}
+afficherPanier();
+}
+
+function afficherPanier(){
+let zone=document.getElementById("cartItems");
+zone.innerHTML="";
+let total=0;
+
+panier.forEach(a=>{
+let st=a.prix*a.qte;
+total+=st;
+zone.innerHTML+=`<p>${a.nom} x ${a.qte} = ${st} KMF</p>`;
+});
+
+let ville=document.getElementById("ville")?.value||"";
+
+if(ville==="Moroni"){
+document.getElementById("livraison").innerText="Livraison : 500 KMF";
+total+=500;
+}else{
+document.getElementById("livraison").innerText="Livraison : À discuter";
+}
+
+document.getElementById("total").innerText="Total : "+total+" KMF";
+}
+
+function ouvrirFormulaire(){
+
+if(panier.length===0){
+
+alert("Panier vide");
+
+return;
+
+}
+
+localStorage.setItem(
+"panierGirly",
+JSON.stringify(panier)
+);
+
+window.location.href="commande.html";
+
+}
+
+function envoyerCommande(){
+let nom=document.getElementById("nom").value;
+let prenom=document.getElementById("prenom").value;
+let telephone=document.getElementById("telephone").value;
+let ville=document.getElementById("ville").value;
+let adresse=document.getElementById("adresse").value;
+
+let total=0,details="";
+
+panier.forEach(p=>{
+let st=p.prix*p.qte;
+total+=st;
+details+=`• ${p.nom} x ${p.qte} = ${st} KMF\n`;
+});
+
+let livraison="À discuter";
+if(ville==="Moroni"){livraison="500 KMF"; total+=500;}
+
+let msg=`🌸 GIRLY BOUTIQUE 🌸
+Nom : ${nom} ${prenom}
+Téléphone : ${telephone}
+Ville : ${ville}
+Adresse : ${adresse}
+
+Produits :
+${details}
+
+Livraison : ${livraison}
+Total : ${total} KMF`;
+
+window.open("https://wa.me/2694447071?text="+encodeURIComponent(msg),"_blank");
+}
+document.querySelectorAll(".card").forEach(card=>{
+card.addEventListener("mousemove",(e)=>{
+const rect=card.getBoundingClientRect();
+const x=e.clientX-rect.left;
+const y=e.clientY-rect.top;
+
+card.style.transform=
+`perspective(1000px)
+rotateX(${-(y-rect.height/2)/30}deg)
+rotateY(${(x-rect.width/2)/30}deg)
+translateY(-10px)`;
+});
+
+card.addEventListener("mouseleave",()=>{
+card.style.transform="translateY(0)";
+});
+});
+</script>
+
+</body>
+</html>
